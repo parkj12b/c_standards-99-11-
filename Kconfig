@@ -1,0 +1,114 @@
+mainmenu "C Standard Project Configuration"
+
+menuconfig BUILD_C99
+	bool "C99 Standard (c_99/ directory)"
+	default y
+	help
+	  Enable compilation for the C99 directory.
+
+if BUILD_C99
+
+menuconfig RUN_INLINE_BENCHMARK
+	bool "Enable Inline Performance Benchmark"
+	default y
+
+if RUN_INLINE_BENCHMARK
+
+config INLINE_ITERATIONS
+	int "Benchmark Iterations"
+	default 1000000000
+
+endif # RUN_INLINE_BENCHMARK
+
+config RUN_BOOL_EXAMPLE
+	bool "Enable C99 Bool Example"
+	default y
+
+config RUN_COMPLEX_EXAMPLE
+	bool "Enable C99 Complex Example"
+	default y
+
+config RUN_FLEXIBLE_MEMBER_EXAMPLE
+	bool "Enable C99 Flexible Array Member Example"
+	default y
+
+config RUN_DESIGNATED_INITIALIZER_EXAMPLE
+	bool "Enable C99 Designated Initializer Example"
+	default y
+
+config RUN_COMPOUND_LITERAL_EXAMPLE
+	bool "Enable C99 Compound Literal Example"
+	default y
+
+config RUN_VARIADIC_MACRO_EXAMPLE
+	bool "Enable C99 Variadic Macro Example"
+	default y
+
+endif # BUILD_C99
+
+menuconfig BUILD_C11
+	bool "C11 Standard (c_11/ directory)"
+	default n
+	help
+	  Enable compilation for the C11 directory.
+
+if BUILD_C11
+
+config RUN_ALIGN_EXAMPLE
+	bool "Enable C11 Alignment Example"
+	default y
+
+config RUN_NORETURN_EXAMPLE
+	bool "Enable C11 Noreturn Example"
+	default y
+
+config RUN_RETURN_EXAMPLE
+	bool "Enable C11 Return Example (for comparison)"
+	default y
+
+config RUN_GENERIC_EXAMPLE
+	bool "Enable C11 Type-Generic Expression Example"
+	default y
+
+config RUN_THREAD_EXAMPLE
+	bool "Enable C11 Threads and Atomics Example"
+	default y
+
+config RUN_FLOAT_EXAMPLE
+	bool "Enable C11 Float Support Example"
+	default y
+
+config RUN_ANONYMOUS_EXAMPLE
+	bool "Enable C11 Anonymous Struct/Union Example"
+	default y
+
+config RUN_STATIC_ASSERT_EXAMPLE
+	bool "Enable C11 Static Assert Example"
+	default y
+
+endif # BUILD_C11
+
+menu "Debugging & Optimization"
+
+config DEBUG_MODE
+	bool "Enable Debug Symbols (-g)"
+	default y
+
+# Range ensures the user can only enter a number between 0 and 3
+config OPTIMIZATION_LEVEL
+	int "Compiler Optimization Level (-O)"
+	range 0 3
+	default 0
+	help
+	  0: None
+	  1: Optimize
+	  2: Optimize even more (standard)
+	  3: Optimize highest
+
+config KEEP_OBJECTS
+	bool "Keep intermediate object files (.o)"
+	default n
+	help
+	  Say Y here to leave .o files on disk after the build.
+
+endmenu
